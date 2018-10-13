@@ -1,0 +1,34 @@
+import java.util.*;
+ 
+public class SortArryByParity{
+    public static int[] sortArrayByParity(int[] A) {
+        int size = A.length;
+        int count=0;
+        List<Integer> odd = new ArrayList<Integer>();
+        List<Integer> even = new ArrayList<Integer>(); 
+        int[] result = new int[size]; 
+        for (int i=0; i<size; i++) {
+            if(A[i]%2==0) { //check if the element is even
+                even.add(A[i]);  
+            }
+            else odd.add(A[i]);
+        }
+        for(int i=0; i<size; i++) {
+            if(i<even.size()){ //make sure that i may will eventually surpass even.size() becuase not every element in the input array may be even, but you design result as an array of size that will contain both even and odd numbers
+                result[i]=even.get(i); 
+            }
+            else {
+                result[i]=odd.get(count); //Be careful! you'll need to get the element from "odd" ArrayList from 0th element!! Using result[i]=odd.get(i) will give you out of bound exception! Because your i is no longer in 0th mark anymore, it's in the next count of where you finish your counting of even element. 
+                count++;
+            }
+        }
+        return result; 
+    }
+    public static void main(String []args){
+        int [] array = {1, 3, 5, 2, 4, 6, 7};
+        array = sortArrayByParity(array);
+        for (int i=0; i<array.length; i++) {
+            System.out.println(i+"th element is " + array[i] +"\n");
+        }
+    }
+}
